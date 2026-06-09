@@ -213,6 +213,14 @@
       will-change: transform;
     }
 
+    @media (max-width: 768px) {
+      .hero-bg img {
+        height: 100%;
+        will-change: auto;
+        transform: none !important;
+      }
+    }
+
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -1287,7 +1295,7 @@
     </div>
     <div class="parallax-overlay">
       <p class="parallax-quote">
-        "Vanussa Mendes has owned this classic establishment for over thirty years and averages <em>3 solid stories</em> per cut."
+        "Our owner has led this classic establishment for decades and averages <em>3 solid stories</em> per cut."
       </p>
     </div>
   </div>
@@ -1384,7 +1392,7 @@
       </div>
       <div class="review-card">
         <span class="review-mark">"</span>
-        <p class="review-text">Georgetown Hairstyling is considered one of the best and most popular barber shops in Georgetown. Vanussa Mendes has owned this classic establishment for over thirty years and averages 3 solid stories per cut.</p>
+        <p class="review-text">Georgetown Hairstyling is considered one of the best and most popular barber shops in Georgetown. Our owner has led this classic establishment for decades and averages 3 solid stories per cut.</p>
         <div class="review-stars">★★★★★</div>
         <p class="review-author">Foursquare</p>
       </div>
@@ -1631,21 +1639,23 @@
       .to('#heroSub',      { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, 0.85)
       .to('#heroCta',      { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 1.0);
 
-    // Hero bg parallax (image scales + translates on scroll)
-    gsap.to('#heroBgImg', {
-      yPercent: 12,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true,
-      }
-    });
+    // Hero bg parallax — desktop only (mobile gets fixed background instead)
+    if (window.matchMedia('(min-width: 769px)').matches) {
+      gsap.to('#heroBgImg', {
+        yPercent: 12,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        }
+      });
+    }
 
-    // "1913" parallax — moves at 0.4x scroll speed
+    // "1913" subtle depth — reduced travel, stays with headline
     gsap.to('#heroYear', {
-      y: () => window.innerHeight * 0.28,
+      y: () => window.innerHeight * 0.06,
       ease: 'none',
       scrollTrigger: {
         trigger: '#hero',
